@@ -1,0 +1,68 @@
+{
+    // The number of spaces a tab is equal to. This setting is overridden based on the file contents when `editor.detectIndentation` is on.
+    "editor.tabSize": 4,
+    // Controls whether unsaved files are remembered between sessions, allowing the save prompt when exiting the editor to be skipped.
+    "files.hotExit": "off",
+    "python.formatting.provider": "yapf",
+    "[json]": {},
+    "files.associations": {
+    "*.jsonc": "jsonc"
+    },
+    "[jsonc]": {},
+    
+    "latex-workshop.latex.recipes":[
+      {
+          "name": "pdflatex_only",
+          "tools": ["pdflatex"]
+      },
+  
+      {
+          "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
+          "tools": ["pdflatex","bibtex","pdflatex","pdflatex"]
+      }
+  
+  ],
+  
+  "latex-workshop.latex.tools": [
+      {
+          "name": "pdflatex_only",
+          "command": "pdflatex_only",
+          "args": [
+              "--shell-escape", // if you want to have the shell-escape flag
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "%DOC%"
+          ]
+      }, 
+  
+      {
+          "name": "pdflatex",
+          "command": "pdflatex",
+          "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOC%"
+          ],
+          "env": {}
+        },
+        {
+          "name": "bibtex",
+          "command": "bibtex",
+          "args": [
+            "%DOCFILE%"
+          ],
+          "env": {}
+        },
+  ],
+    "editor.wordWrap": "on",
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "editor.smoothScrolling": true,
+    "editor.mouseWheelZoom": true,
+    "workbench.colorTheme": "Solarized Dark",
+    "extensions.ignoreRecommendations": false,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "window.zoomLevel": 1
+    }

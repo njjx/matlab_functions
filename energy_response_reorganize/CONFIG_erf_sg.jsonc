@@ -1,0 +1,25 @@
+// This is a sample config file for energy response generation of CdTe-based PCD
+{
+    //Energy of the input photon [keV]
+    "InputPhotonEnergy": 59.5,
+
+    //Threshold energy range [keV]
+    "ThresholdEnergy": "[20:80]", 
+
+    //K-fluorescence travel distances [um]
+    "KTravelDistance": "1/2*[112 154 57 80]*0.9", 
+
+    //Charge spreading radius [um]
+    "ChargeSpreadingRadius": 9, 
+
+    //Electronics noise level [keV]
+    "ElectronicsNoise": 4.8 ,
+
+    //Conversion Material Thickness [um]
+    "ConversionMaterialThickness": 750, 
+
+    //Detector Pixel Size [um]
+    "DetectorPixelSize": 100
+}
+
+

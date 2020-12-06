@@ -1,0 +1,4 @@
+{
+    "ChemicalFomula": ["Ca", 1, "F", 2], //chemical formula 
+    "Density": 1 // g/ml
+}

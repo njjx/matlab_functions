@@ -1,0 +1,22 @@
+function u_measured = Xu2DPamtrixGetMeasuredu(projection_image, threshold_val)
+%u_measured = Xu2DPamtrixGetMeasuredu(projection_image, threshold_val)
+%This function is for measurement of the position of the BBs in a
+%projection image
+
+projection_image_bw = projection_image>threshold_val;
+temp_s=regionprops(projection_image_bw,projection_image, 'WeightedCentroid');
+
+detected_BBs_count = length(temp_s);
+
+u_measured=zeros(1,detected_BBs_count);
+for idx = 1:detected_BBs_count
+    temp = temp_s(idx).WeightedCentroid;
+    u_measured(idx) = temp(2)-1;%in cpp u idx begins with 0
+end
+
+x = (775-10:775+10)';
+y = projection_image(x);
+
+f =fit(x,y,'gauss2');
+
+plot(f,x,y)

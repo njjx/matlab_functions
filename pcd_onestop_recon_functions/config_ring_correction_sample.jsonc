@@ -1,0 +1,20 @@
+{
+    "InputFolder":"./rec/head_d/", 
+    "OutputFolder":"./rec/head_d/", 
+
+    "InputPrefix":"bc_", 
+    "OutputFileReplace":["bc","brc"],
+
+    "ReconImageThresholdVals": [-100,150], 
+
+    "MedianFilterWidth":20,//pixels
+    "MeanFilterWidth":60,//degrees
+    "CorrectionThreshold": 40,//HU or MU
+
+    "InnerRadius": 30, //pixels
+    "InnerCorrectionThreshold": 90//HU or MU
+
+    //"Rotation": 83
+
+
+}

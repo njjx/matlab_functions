@@ -1,0 +1,38 @@
+// This is a config sample for bone correction
+
+{
+  //Set the threshold for tissue and bone
+  "TissueThresholdLow": -200, 
+  "TissueThresholdHigh": 150, 
+  "BoneThresholdLow": 200, 
+  "BoneThresholdHigh": 8000,
+
+  // Bone^2 recon coefficient
+  "BoneBoneCoef": 0.02, 
+  // Bone.*Tissue recon coefficient
+  "BoneTissueCoef": -0.025, 
+
+  //OPTIONAL input file prefix 
+  // if not set, the program will use the prefix in the recon config
+  "InputFilePrefix": "rec_",
+  // name replace for recon images
+  //sample: "rec_01.raw" will be "rec_bc_01.raw"
+  "RecCorrectionFileReplace": [ "rec_", "bc_" ],
+
+  //Set input folder and output folder for thresholding
+  //"InputReconDir": "./rec/head_d/",
+
+  /*********************************************************
+	* temprory folder to save bone^2 and bone*water sinograms
+	*********************************************************/
+  //"InputDir": "./rec/head_d/bone_corr_temp/",
+  //"OutputDir": "./sgm/head_d/bone_corr_temp/",
+
+  // all the files in the input directory, use regular expression
+  "InputFiles": "img_.*.raw",
+  // output file name (prefix, replace)
+  "OutputFilePrefix": "",
+  // replace substring in input file name
+  "OutputFileReplace": [ "img_", "sgm_" ]
+
+}

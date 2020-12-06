@@ -1,0 +1,83 @@
+// This is a config sample for mgfbp
+
+{
+
+  /********************************************************* 
+  * input (sinogram) and output (recon) directory and files
+  *********************************************************/
+
+  "InputDir": "./sgm/head_d",
+  "OutputDir": "./rec/head_d",
+
+  // all the files in the input directory, use regular expression
+  "InputFiles": "sgm_.*.raw",
+  // output file name (prefix, replace)
+  "OutputFilePrefix": "",
+  // replace substring in input file name
+  "OutputFileReplace": [ "sgm_", "rec_"],
+
+  // save filtered sinogram data
+  "SaveFilteredSinogram": false,
+
+  /*********************************************************
+	* sinogram and slice parameters
+  *********************************************************/
+  
+  // number of detector elements
+  "SinogramWidth": 1280,
+  // number of frames
+  "SinogramHeight": 495,
+  // number of views for reconstruction
+  "Views": 495,
+  // number of slices in each sinogram file
+  "SliceCount": 1,
+
+  "TotalScanAngle": -197.17,
+
+  // the physical size of detector element size [mm]
+  "DetectorElementSize": 0.4,
+  // the position (coordinate) of detector center (left is positive) [mm]
+  "DetectorOffcenter": 20.8,
+
+  // source to isocenter distance [mm]
+  "SourceIsocenterDistance": 740,
+  // source to detector distance [mm]
+  "SourceDetectorDistance": 1090,
+
+  /*********************************************************
+	* reconstruction parameters
+	*********************************************************/
+
+  // Beam hardening correction (optional), support 10 parameters [s = p0 + p1*s + p2*s^2 + p3*s^3 + ...]
+  //"BeamHardeningCorrection": [ 0, 1, 2, 3, 4, 5 ],
+
+  // image dimension (integer)
+  "ImageDimension": 512,
+
+  /* pixel size or image size, just use one of them */
+
+  // image pixel size [mm]
+  //"PixelSize": 0.4,
+
+  // image size [mm]
+  "ImageSize": 200,
+
+  // rotate the image [degree]
+  "ImageRotation": -83,
+  // image center [x(mm), y(mm)]
+  "ImageCenter": [0, 0],
+
+  /* reconstruction kernel, avaliable list:
+  *  1. "HammingFilter": t + (1-t)*cos(pi*k/ 2*kn), 1 for ramp kernel, 0 for consine kernel, others are in-between
+  *  2. "QuadraticFilter": (for bone-plus kernel) tow parameters for t and h, three parameters for a, b, c
+  *  3. "Polynomial": an*k^n + ... + a1*k + a0, (n <= 6)
+  *  4. "Hilbert": 1 or -1 (phase contrast, 1 or -1 for right or left direction)
+  "GaussianApodizedRamp": 1
+  */
+  //"HammingFilter": 0.5
+  //"QuadraticFilter": [ 0.42, 0 ]
+  //"Polynomial": [ -15.9236, -2.1540, 3.1106, 2.3872, 1.0000 ]
+  "GaussianApodizedRamp": 1,
+
+  "PMatrixFile":"pmatrix_measured_file.jsonc"
+}

@@ -1,0 +1,85 @@
+// preprocessing config file
+{
+    /***********************************
+    *****Data acquisition parameters*****
+    ************************************/
+    //for record purpose; will not imapct recon results
+    "TubePotential": "125 kVp",
+    "Filtration": "2 mm Cu",
+    "TubeCurrent": "90 mA",
+    "DetectorReadoutSpeed": "30 Hz",
+    "RotationSpeed": "xxx degrees/s",
+    "TotalAcquisitionTime": "20 s",
+    "Thresholds": [20],
+
+    //whether the preprocessing should be performed or not
+    "ReconAndAverageOnly": true, 
+
+
+    /********************************************************* 
+    ***********raw data directory and files*******************
+    *********************************************************/
+    "RawDataPrjFolder": "./data/Head_phantom/head_phantom_position_4/",
+    "RawDataBkgFolder": "./data/air/",
+    "RawDataBkgName": "air_3_TE.evi",
+    "RawDataPrjName": "*_TE.evi",
+    "RawToSgmFileReplace": ["_","_"],
+    "RawToSgmFilePrefix": "sgm_",
+
+    //Detector may have problems in the first several frames
+    //So we may need to read from the i-th frame with i >= 1
+    //i-th frame will be included
+    "BeginFrameIdx": 1,
+    //OPTIONAL; set a different bkg begin frame idx
+    "BeginBkgFrameIdx": 125, 
+    //set sinogram boundary
+    //value outside the boundary will be zero
+    //in the range 1 to 5120
+    "SinogramBoundary":[729,4080], 
+    // number of images in background scan
+    "BkgNum": 250,  
+
+    "SgmGlobalShift":0.1419,
+    "PanelSpecificWaterCorrection":true,
+
+    //The detector was recalled once
+    //for data acuired before the recall, set version to 1
+    //evi head will be 2368 bits
+    //for data acuired after the recall, set version to 1
+    //evi head will be 3456 bits
+    "DetectorFirmwareVersion": 2,
+    // which panel correction method to use; 
+    //0 for no correction
+    //1 for full scan with panel symmetry correction, 
+    //2 for short scan with panel alignment
+    "PanelCorrectionMethod": 2,
+    "PanelCorrectionBeginIdx": 5,
+    "PanelCorrectionEndIdx": 15,
+    "PanelSymmetryGapWidth": 10, //will not come to play for method 2
+    "PanelAlignmentInterpWidth": 20,
+    "PanelInterpGapWidth": 3,
+
+    //water correction coeffient
+    //can be either directly set here or be save in a .mat file
+    "WaterCorrectionCoef": [0.02,1,0],
+    //"WaterCorrectionCoefFile": "water_corr_coef.mat",
+
+    //whether the files are with dimensions or not
+    "FileNameWithDim": false,
+
+    //whether the images are rotated
+    //The pamtrix makes the rotation of the phantom not easy in the recon
+    "RotateAfterRecon":83,//
+
+    //whether the images should be convert to HU
+    "ConvertToHU": true,
+    "WaterMu": 0.01855, //cm^-1
+
+    //whether the images with the same header need to be averaged
+    //if averaged, there will be a file with 'ave_' as a prefix
+    "AverageReconFiles": true,
+    "AverageReconInputPrefix": "rec_",
+    "AverageReconAddPrefix": "ave_",
+    //whether the images before the average are discarded or not
+    "DeleteOriginalReconFilesAfterAverage": true
+}

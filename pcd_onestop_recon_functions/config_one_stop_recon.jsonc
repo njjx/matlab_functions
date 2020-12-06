@@ -1,0 +1,17 @@
+{
+    "DualEnergy": true,
+    "EnergyBin": "HE",
+    "AlreadyHaveLEImages": true,
+    "MeasuredMuVersusMuYouWant": [76,50],
+
+
+    "ConfigFolder": "configs/head",
+    "ConfigPreprocessing": "/config_preprocessing.jsonc",
+    "ReconOnly": true,
+    "ConfigFbp": "/config_fbp.jsonc",
+    "ConfigFpj": "/config_fpj.jsonc",
+    "BoneCorrection": true,
+    "ConfigBoneCorrection": "/config_bone_corr.jsonc",
+    "RingCorrection": true,
+    "ConfigRingCorrection": "/config_ring_correction.jsonc"
+}

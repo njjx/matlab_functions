@@ -1,0 +1,12 @@
+{
+    //1 for GE, 2 for siemens
+    "Vendor": 2,
+
+    "InputDir": "./DCT_HEAD_CLEAR_NAT_FILL_FULL_HU_NORMAL_[AX3D]_0004", 
+
+    "InputPrefix": "20_08_01-16_14_38", 
+
+    "ResliceBinningCount": 9, 
+
+    "Rotation": 93 //degrees
+}

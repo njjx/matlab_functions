@@ -1,0 +1,27 @@
+
+%Change default axes fonts.
+set(0,'DefaultAxesFontName', 'Times New Roman')
+set(0,'DefaultAxesFontSize', 16)
+
+%Change default text fonts.
+set(0,'DefaultTextFontname', 'Times New Roman')
+set(0,'DefaultTextFontSize', 16)
+
+close all;
+clc;
+clear all;
+%Change default axes fonts.
+set(0,'DefaultAxesFontName', 'Arial')
+set(0,'DefaultAxesFontSize', 16)
+
+%Change default text fonts.
+set(0,'DefaultTextFontname', 'Arial')
+set(0,'DefaultTextFontSize', 16)
+
+set(legend,'fontsize',15);
+set(legend,'color','k');
+set(legend,'textcolor','w');
+set(gca,'XColor','white','YColor','white','ZColor','white');
+set(gca, 'color', 'black');
+
+imshow(strain_image,'border','tight','initialmagnification','fit');
