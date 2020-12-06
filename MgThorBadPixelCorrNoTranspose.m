@@ -1,12 +1,10 @@
-function img_3d_corr = MgThorBadPixelCorrNoTranspose(img_3d)
+function img_3d = MgThorBadPixelCorrNoTranspose(img_3d)
 %
 
 pages = size(img_3d, 3);
 
-img_3d_corr = zeros(size(img_3d));
-
 for page = 1:pages
-    img_3d_corr(:,:,page) = XuThorBadPixelCorr(img_3d(:,:,page));
+    img_3d(:,:,page) = XuThorBadPixelCorr(img_3d(:,:,page));
 end
 
 end
