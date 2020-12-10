@@ -1,0 +1,35 @@
+{
+    // Fringe period, [unit: pixel]
+    // If you don't know its period, specify a file name with frame number to let the program calculate it.
+    // Example: 
+    // "FringePeriod": 18.32
+    // "FringePeriod": ["./test1/data/air_te.evi", 500]
+
+    // "FringePeriod": 18.32,
+    "FringePeriod": ["./test1/data/air_te.evi", 500],
+
+    // Calibration file name I0 (tiff format)
+    "I0Filename": "I0.tiff",
+
+    // projection scan file name
+    "PrjFilename": "./test1/data/obj_TE.EVI",
+    // air scan file name
+    "AirFilename": "./test1/data/air_TE.EVI",
+
+    // Save temporary files
+    "SaveTempFiles": false,
+
+    // The folder to save result images
+    "OutputFolder": "test1",
+
+    "FrameRate": 100, //Hz
+    "TubeCurrent": 15, //mA
+    "TubePotential": 70,//kVp
+
+    "FrameNum": 1000, // number of frames
+    
+    "MoveSpeed": 10, //mm/s
+    "MagnificationRatio": 1.26,
+    // "MoirePeriod": 18.3, //in pixels
+    "DetectorPixelSize": 0.1//mm
+}

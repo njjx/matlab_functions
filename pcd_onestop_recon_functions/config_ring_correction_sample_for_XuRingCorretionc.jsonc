@@ -1,0 +1,13 @@
+{
+"InputPrefix":"basis_ca",
+"OutputFileReplace":["basis_","basisRC_"],
+"ReconImageThresholdVals":[-2,4],
+"MedianFilterWidth":80,
+"MeanFilterWidth":90,
+"CorrectionThreshold":5,
+"InputFolder":"rec/head/final_images/decompose",
+"OutputFolder":"rec/head/final_images/decompose",
+"ImageDimension":512,
+"SliceCount":111,
+"ConvertToHU":0
+}
