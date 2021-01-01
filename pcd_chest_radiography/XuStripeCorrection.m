@@ -17,3 +17,5 @@ for idx=1:size(image_input,1)
 end
 
 image_output=data_med_diff_thresholded_average+image_input;
+
+end

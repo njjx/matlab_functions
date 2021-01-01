@@ -11,6 +11,8 @@ roi_mean = mean(mean(mean(Roi)));
 
 Roi = Roi./mean(Roi,3)*roi_mean;
 
+%XuWriteRawWithDim('roi',Roi);
+
 NPS2D=zeros(RoiSize,RoiSize);
 for fidx=1:Zdim
     NPS2D=NPS2D+fft2(Roi(:,:,fidx)-roi_mean).*conj(fft2(Roi(:,:,fidx)-roi_mean));

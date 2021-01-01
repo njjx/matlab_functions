@@ -1,6 +1,19 @@
-function period_in_pixel = XuCalcPeriod(img_roi)
-%img_roi is a square matrix with odd number cols and rows
-%Fringe stripes are horizontal
+function period_in_pixel = XuCalcPeriod(img_roi,stripe_direction)
+%img_roi is a square matrix with ODD number cols and rows
+%Fringe stripes are horizontal by default
+%stripe_direction can be 'horizontal' or 'vertical'
+
+if nargin ==1
+    stripe_direction = 'horizontal';
+end
+
+switch stripe_direction
+    case 'horizontal'
+    case 'vertical'
+        img_roi = img_roi';
+    otherwise
+        error('stripe_direction can only be ''horizontal'' or ''vertical'' !');
+end
 
 roi_size =size(img_roi,1);
 
