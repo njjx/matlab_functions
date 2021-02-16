@@ -17,4 +17,4 @@ switch(lower(s_mode))
         exit();
 end
 
-output_image = XuThorGainCorrection(image_to_be_corrected,image_flat_field,[138:229],[1:64]);
+output_image = XuThorGainCorrection(image_to_be_corrected,image_flat_field,[138:229],[1:54]);

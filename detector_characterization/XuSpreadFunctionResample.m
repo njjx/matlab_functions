@@ -1,7 +1,12 @@
-function output = XuSpreadFunctionResample(edge_spread_function, resampling_pixel_size)
-
+function output = XuSpreadFunctionResample(edge_spread_function, resampling_pixel_size, StartIdx, EndIdx)
+if nargin <=2
 StartIdx=ceil(min(edge_spread_function(1,:)));
 EndIdx=floor(max(edge_spread_function(1,:)));
+else
+end
+
+% StartIdx=ceil(min(edge_spread_function(1,:)));
+% EndIdx=floor(max(edge_spread_function(1,:)));
 
 
 ResamplingInterval=resampling_pixel_size;

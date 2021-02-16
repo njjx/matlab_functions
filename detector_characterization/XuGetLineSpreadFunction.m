@@ -34,7 +34,7 @@ P=polyfit(height_vec,indx',1);
 
 ShiftedIndx=zeros(height,width);
 for rowidx=1:height
-    ShiftedIndx(rowidx,:)=(1:width)-tan(P(1,1))*(rowidx-1)*1;
+    ShiftedIndx(rowidx,:)=(1:width)-(P(1,1))*(rowidx-1)*1;
 end
 
 line_spread_function=zeros(2,height*width);
