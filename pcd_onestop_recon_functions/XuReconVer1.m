@@ -1,4 +1,6 @@
 function status = XuReconVer1(s_recon_config)
+%This function wil modify a parent config file to match the current recon
+%task
 
 para = XuReadJsonc(s_recon_config);
 
@@ -17,7 +19,7 @@ end
 
 
 
-%%
+%% create data folders for that date
 mkdir(['data/' s_date '/calphan']);
 mkdir(['data/' s_date '/air']);
 mkdir('configs/temp_config/object');
@@ -46,7 +48,8 @@ end
 %         'DeleteOriginalReconFilesAfterAverage',para.DeleteImagesAfterAverage);
 % end
 
-%%
+%% change the reocn parameters
+% including the folder for the pmatrix
 XuModifyJsoncFile('configs/object/config_fbp.jsonc',...
     'InputDir',['./sgm/' s_date '/' data_foler, '/te'],...
     'configs/temp_config/object/config_fbp.jsonc');
@@ -92,7 +95,7 @@ if exist('image_rotation','var')
 end
 
 
-%%
+%% bone correction config files
 XuModifyJsoncFile('configs/object/config_bone_corr.jsonc',...
     [],[],'configs/temp_config/object/config_bone_corr.jsonc');
 XuModifyJsoncFile('configs/object/config_ring_correction.jsonc',...
@@ -105,7 +108,7 @@ XuModifyJsoncFile('configs/object/config_one_stop_recon.jsonc',...
     'configs/temp_config/object/config_one_stop_recon.jsonc');
 XuModifyJsoncFile('configs/temp_config/object/config_one_stop_recon.jsonc',...
     'ReconOnly',~bool_gen_sgm);
-%%
+%% normalize HU value
 switch lower(s_energy_bin)
     case 'te'
         XuModifyJsoncFile('configs/temp_config/object/config_one_stop_recon.jsonc',...

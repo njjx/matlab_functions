@@ -19,4 +19,8 @@ for fidx=1:Zdim
 end
 
 NPS2D=NPS2D/(Zdim-1)*DeltaX^2/RoiSize^2;
-frequency = [0:RoiSize-1]*1/(RoiSize+DeltaX);
+
+frequency = 1/(RoiSize*DeltaX)*[(-RoiSize/2):(RoiSize/2-1)];
+
+
+%frequency = [0:RoiSize-1]*1/(RoiSize+DeltaX);
