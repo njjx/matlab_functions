@@ -27,10 +27,11 @@ elseif nargin == 5
     sampleInterval = 1;
 end
 
+p = MgCmdLineProgressBar("Processing ");
 
 if  scanMode == "h" || scanMode == "horizontal"
     for row = 1:rows
-        row
+        p.print(row, rows);
         idx_non_nan = squeeze(min(~isnan(obj_3d(row, :, :)), [], 2));
         
         if sum(idx_non_nan)>5
