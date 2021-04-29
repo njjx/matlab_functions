@@ -82,9 +82,9 @@ end
 
 
 for idx=1:recon_para.SinogramHeight
-    if mod(idx,2)==0 || idx == recon_para.SinogramHeight
+    if mod(idx,5)==0 || idx == recon_para.SinogramHeight
         pb.print(idx,recon_para.SinogramHeight);
-        pause(0.01)
+        pause(0.001)
     end
     
     if preprocessing_para.DetectorFirmwareVersion==1
