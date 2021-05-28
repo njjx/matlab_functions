@@ -44,7 +44,7 @@ for fidx=1:size(image_rebin,3)
     end
     image_rebin(:,:,fidx)=imrotate(image_rebin(:,:,fidx),-reslice_para.Rotation,'bilinear','crop');
     if reslice_para.Vendor == 1
-        image_rebin(:,:,fidx)=image_rebin(:,:,fidx)+3024;
+        image_rebin(:,:,fidx)=image_rebin(:,:,fidx)-3024;
     elseif reslice_para.Vendor == 2
         image_rebin(:,:,fidx)=image_rebin(:,:,fidx)-1000;
     end

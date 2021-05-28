@@ -57,7 +57,7 @@ for file_idx =1:length(D)
         end
         
         %figure();
-        %imshow(img_temp,[th_l th_h]);
+        imshow(img_temp',[th_l th_h]);
         %img_temp = img_temp+air_roi*1000;
         
         [img_pol,mr,mtheta]=XuPolarToCartesian(img_temp,0,0);
@@ -92,9 +92,10 @@ for file_idx =1:length(D)
         img_corr=CartesianToPolar(img_pol_corrected,mr,mtheta,img_dim,0,0);
         
         %img_corr = img_corr-air_roi*1000;
-        
-        %imshow(img_corr,[th_l th_h]);
-        %pause(0.1);
+         pause(0.1);
+        figure();
+        imshow(img_corr',[th_l th_h]);
+       
         
         if isfield(rc_para, 'Rotation')
             img_corr = imrotate(img_corr,rc_para.Rotation,'bilinear','crop');

@@ -1,11 +1,13 @@
-function sgm_corr = XuExtrapSgmCarm(sgm, s_config_preprocessing, s_config_fbp)
+function sgm_corr = XuExtrapSgmCarm(sgm, s_config_preprocessing, s_config_fbp,mu_water)
 
+if nargin ==3
+    fbp_para = XuReadJsonc(s_config_fbp);
+    mu_tissue = fbp_para.WaterMu;
+else
+    fbp_para = XuReadJsonc(s_config_fbp);
+    mu_tissue = mu_water;
+end
 preprocessing_para = XuReadJsonc(s_config_preprocessing);
-fbp_para = XuReadJsonc(s_config_fbp);
-
-
-mu_tissue = fbp_para.WaterMu;
-
 
 % detector element size [mm]
 dx = fbp_para.DetectorElementSize;
@@ -40,7 +42,7 @@ for slice = 1:S
         % radius R
         R = sqrt(p^2/(4*mu_tissue^2) + x^2);
         
-        exp_ratio = 3;
+        exp_ratio = 1;
         
         idx = idx_left(1);
         for col = 1:idx-1

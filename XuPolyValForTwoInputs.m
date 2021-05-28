@@ -1,5 +1,7 @@
 function output_vector = XuPolyValForTwoInputs(coeff, input_vector_1,input_vector_2, order_cell)
 
+origin_size = size(input_vector_1);
+
 input_vector_1 = XuTallVector(input_vector_1);
 input_vector_2 = XuTallVector(input_vector_2);
 coeff=squeeze(coeff);
@@ -14,5 +16,5 @@ for idx = 1:length(order_cell)
 end
 
 output_vector = matrix_A*coeff;
-
+output_vector = reshape(output_vector,origin_size);
 %output_vector = XuTallVector(output_vector);

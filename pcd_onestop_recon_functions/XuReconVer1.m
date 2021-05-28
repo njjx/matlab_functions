@@ -15,6 +15,9 @@ if isfield(para,'SgmOffset')
 end
 if isfield(para,'ImageRotation')
     image_rotation = para.ImageRotation;
+    if isfield(para,'AllSweepRotation')
+        image_rotation = image_rotation+para.AllSweepRotation;
+    end
 end
 
 
@@ -65,6 +68,8 @@ XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
     'DetectorOffCenterFile',['paras_and_pmatrix/' s_date '/offcenter_file.jsonc']);
 XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
     'ScanAngleFile',['paras_and_pmatrix/' s_date '/scan_angle.jsonc']);
+XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+    'SwingAngleFile',['paras_and_pmatrix/' s_date '/delta_theta_file.jsonc']);
 
 para_fbp = XuReadJsonc('configs/temp_config/object/config_fbp.jsonc');
 
@@ -85,33 +90,38 @@ if isfield(para, 'MultiSweepIdx')
         sweep_s = ['sweep_' num2str(para.MultiSweepIdx)];
         
         XuModifyJsoncFile('configs/temp_config/object/config_preprocessing.jsonc',...
-    'RawDataPrjFolder',['./data/' s_date '/' data_foler '/'  sweep_s,   '/']);
+            'RawDataPrjFolder',['./data/' s_date '/' data_foler '/'  sweep_s,   '/']);
         
         XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
             'InputDir',['./sgm/' s_date '/' data_foler '/'  sweep_s, '/te']);
         XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
             'OutputDir',['./rec/' s_date '/'  data_foler '/'  sweep_s, '/te']);
+
+        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+            'PMatrixFile',['paras_and_pmatrix/' s_date '/' sweep_s '/pmatrix_file.jsonc']);
+        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+            'SDDFile',['paras_and_pmatrix/' s_date '/' sweep_s '/sdd_file.jsonc']);
+        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+            'SIDFile',['paras_and_pmatrix/' s_date '/' sweep_s '/sid_file.jsonc']);
+        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+            'DetectorOffCenterFile',['paras_and_pmatrix/' s_date '/' sweep_s '/offcenter_file.jsonc']);
+        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+            'ScanAngleFile',['paras_and_pmatrix/' s_date '/' sweep_s '/scan_angle.jsonc']);
+        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+            'SwingAngleFile',['paras_and_pmatrix/' s_date '/' sweep_s '/delta_theta_file.jsonc']);
         
-        sweep_mod_num = length(para.TotalScanAngle);
-        
-        sweep_s_pm = ['sweep_' num2str(XuMod(para.MultiSweepIdx,2))];
+        if isfield(para,'TotalScanAngle')
+            XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+                'TotalScanAngle',para.TotalScanAngle(para.MultiSweepIdx));
+        end
         XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
-            'PMatrixFile',['paras_and_pmatrix/' s_date '/' sweep_s_pm '/pmatrix_file.jsonc']);
+            'SinogramHeight',para.SinogramHeight(para.MultiSweepIdx));
         XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
-            'SDDFile',['paras_and_pmatrix/' s_date '/' sweep_s_pm '/sdd_file.jsonc']);
-        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
-            'SIDFile',['paras_and_pmatrix/' s_date '/' sweep_s_pm '/sid_file.jsonc']);
-        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
-            'DetectorOffCenterFile',['paras_and_pmatrix/' s_date '/' sweep_s_pm '/offcenter_file.jsonc']);
-        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
-            'ScanAngleFile',['paras_and_pmatrix/' s_date '/' sweep_s_pm '/scan_angle.jsonc']);
-        
-        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
-            'TotalScanAngle',para.TotalScanAngle(XuMod(para.MultiSweepIdx,sweep_mod_num)));
+            'Views',para.Views(para.MultiSweepIdx));
         
         if exist('image_rotation','var')
             XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
-                'ImageRotation',image_rotation(XuMod(para.MultiSweepIdx,sweep_mod_num)));
+                'ImageRotation',image_rotation(para.MultiSweepIdx));
         end
 
         
@@ -130,6 +140,8 @@ if isfield(para,'GeometricCorrection')
             'DetectorOffCenterFile',[]);
         XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
             'ScanAngleFile',[]);
+        XuModifyJsoncFile('configs/temp_config/object/config_fbp.jsonc',...
+            'SwingAngleFile',[]);
     end
 end
 

@@ -36,5 +36,13 @@ XuWholeReconProcessWithConfig('configs/temp_config/calphan/config_one_stop_recon
 %%
 Xu2DPmatrixFromCalPhantom_ver2('configs/temp_config/calphan/config_calc_pmatrix.jsonc',...
     'configs/temp_config/calphan/config_fbp.jsonc',s_date);
+%%
+% close all;
+% XuModifyJsoncFile('configs/temp_config/calphan/config_calc_pmatrix.jsonc',...
+%     'ReconCalPhanImage',['rec/' s_date '/calphan/measured_p_rec_1_te.raw']);
+% 
+% Xu2DPmatrixFromCalPhantom_ver2('configs/temp_config/calphan/config_calc_pmatrix.jsonc',...
+%     'configs/temp_config/calphan/config_fbp.jsonc',s_date);
 
+%%
 status =1;

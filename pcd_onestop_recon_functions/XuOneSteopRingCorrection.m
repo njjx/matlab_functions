@@ -42,7 +42,7 @@ for file_idx =1:length(D)
     
     filename_origin = D(file_idx).name;
     
-    image_temp = XuReadRaw([rc_para.InputFolder '\'...
+    img_recon = XuReadRaw([rc_para.InputFolder '\'...
         filename_origin], [img_dim img_dim img_slice_count]);
     
     
@@ -54,25 +54,24 @@ for file_idx =1:length(D)
     th_l=rc_para.ReconImageThresholdVals(1);
     th_h=rc_para.ReconImageThresholdVals(2);
     
+    if preprocessing_para.ConvertToHU
+        img_recon=img_recon+1000;%add 1000 if the image is CT number
+        th_l=rc_para.ReconImageThresholdVals(1)+1000;
+        th_h=rc_para.ReconImageThresholdVals(2)+1000;
+        %air_roi = (img_temp < 500);
+    end
+    
     
     for idx=1:img_slice_count
         
         close all;
-        img_temp=image_temp(:,:,idx);
-        
+        img_recon_slice=img_recon(:,:,idx);
         figure();
-        imshow(img_temp',[th_l th_h]);
-        if preprocessing_para.ConvertToHU
-            img_temp=img_temp+1000;%add 1000 if the image is CT number
-            th_l=rc_para.ReconImageThresholdVals(1)+1000;
-            th_h=rc_para.ReconImageThresholdVals(2)+1000;
-            %air_roi = (img_temp < 500);
-        end
-        
-        
+        imshow(img_recon_slice',[th_l th_h]);
+ 
         %img_temp = img_temp+air_roi*1000;
         
-        [img_pol,mr,mtheta]=XuPolarToCartesian(img_temp,0,0);
+        [img_pol,mr,mtheta]=XuPolarToCartesian(img_recon_slice,0,0);
         
         theta_interval = radtodeg(3*pi/3.5/img_dim);
         mean_filter_width = round(rc_para.MeanFilterWidth/theta_interval);
@@ -130,7 +129,7 @@ for file_idx =1:length(D)
             end
         end
         imshow(img_corr',[th_l th_h]);
-        pause(1);
+        pause(0.2);
     end
     
     
