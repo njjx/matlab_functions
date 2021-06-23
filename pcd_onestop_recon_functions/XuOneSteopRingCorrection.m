@@ -110,26 +110,26 @@ for file_idx =1:length(D)
         if isfield(rc_para, 'Rotation')
             img_corr = imrotate(img_corr,rc_para.Rotation,'bilinear','crop');
         end
-        
-        if preprocessing_para.ConvertToHU
-            if idx==1
-                WriteRaw([rc_para.OutputFolder, '\',...
-                    filename_rc],img_corr-1000);
-            else
-                AddRaw([rc_para.OutputFolder, '\',...
-                    filename_rc],img_corr-1000);
-            end
-        else
-            if idx==1
-                WriteRaw([rc_para.OutputFolder, '\',...
-                    filename_rc],img_corr);
-            else
-                AddRaw([rc_para.OutputFolder, '\',...
-                    filename_rc],img_corr);
-            end
-        end
         imshow(img_corr',[th_l th_h]);
-        pause(0.2);
+        pause(0.05);
+        if isfield(rc_para,'ConvertBackToMu')
+            if rc_para.ConvertBackToMu==1
+                img_corr = img_corr/1000*recon_para.WaterMu;
+            elseif preprocessing_para.ConvertToHU
+                img_corr = img_corr-1000;
+            end
+        elseif preprocessing_para.ConvertToHU
+            img_corr = img_corr-1000;
+        end
+        
+        if idx==1
+            WriteRaw([rc_para.OutputFolder, '\',...
+                filename_rc],img_corr);
+        else
+            AddRaw([rc_para.OutputFolder, '\',...
+                filename_rc],img_corr);
+        end
+        
     end
     
     

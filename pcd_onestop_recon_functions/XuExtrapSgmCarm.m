@@ -42,7 +42,7 @@ for slice = 1:S
         % radius R
         R = sqrt(p^2/(4*mu_tissue^2) + x^2);
         
-        exp_ratio = 1;
+        exp_ratio = 0.75;
         
         idx = idx_left(1);
         for col = 1:idx-1

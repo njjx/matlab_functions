@@ -218,6 +218,16 @@ end
 
 XuModifyJsoncFile('configs/temp_config/object/config_one_stop_recon.jsonc',...
     'EnergyBin',s_energy_bin);
+%%
+
+para_bone_corr = XuReadJsonc('configs/object/config_bone_corr.jsonc');
+para_bone_corr = XuStructPassVal(para,para_bone_corr);
+XuStructToJsonc('configs/temp_config/object/config_bone_corr.jsonc',para_bone_corr);
+
+para_bone_corr = XuReadJsonc('configs/object/config_ring_correction.jsonc');
+para_bone_corr = XuStructPassVal(para,para_bone_corr);
+XuStructToJsonc('configs/temp_config/object/config_ring_correction.jsonc',para_bone_corr);
+
 %% whether bone and ring corrections are performed
 
 if isfield(para,'BoneCorrection')

@@ -119,7 +119,7 @@ if recon_only==0
             sgm = sgm+preprocessing_para.SgmGlobalShift;
         else
         end
-        
+
         if isfield(preprocessing_para,'PanelSpecificWaterCorrection')
             if preprocessing_para.PanelSpecificWaterCorrection && isfield(preprocessing_para,'Protocol')
                 
@@ -133,6 +133,7 @@ if recon_only==0
             end
         else
         end
+
         
         if isfield(preprocessing_para,'CorrectViewsWithAbnormalReadout')
             if preprocessing_para.CorrectViewsWithAbnormalReadout
@@ -259,6 +260,8 @@ if recon_only==0
 else
 end
 %% truncation correction after preprocessing
+
+
 if isfield(preprocessing_para,'TruncationCorrection')
     if preprocessing_para.TruncationCorrection
         fprintf('Performing truncation correction...\n');
@@ -279,6 +282,7 @@ if isfield(preprocessing_para,'TruncationCorrection')
         fprintf(' Truncation correction finished!\n');
     end
 end
+
 %%
 mkdir(recon_para.OutputDir);
 mkdir('temp_config');

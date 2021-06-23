@@ -16,7 +16,7 @@ for row_idx = 1:rows
     p.print(row_idx,rows);
     idx_non_nan = squeeze(min(~isnan(obj_3d(row_idx, :, :)), [], 2));
     
-    if sum(idx_non_nan)>5
+    if sum(idx_non_nan)>8
         for col_idx = 1:cols
             
             

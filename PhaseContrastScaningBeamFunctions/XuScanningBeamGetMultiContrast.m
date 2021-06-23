@@ -21,7 +21,7 @@ I0 = I0(roi_rows, roi_cols);
 img_eps = img_eps(roi_rows, roi_cols);
 img_phi = img_phi(roi_rows, roi_cols);
 
-imshow(img_eps,[0.1 0.3]);
+imshow(img_eps,[0.0 0.3]);
 
 %===============================================================================
 % Read scanning beam air and obj data
