@@ -191,6 +191,9 @@ if isfield(para,'MeasuredMuVersusMuYouWant')
             disp('energy bin can only be te, he, or le.');
             exit();
     end
+elseif isfield(para, 'WaterMu')
+        XuModifyJsoncFile('configs/temp_config/object/config_one_stop_recon.jsonc',...
+                'MeasuredMuVersusMuYouWant',[0 0]);
 else % default values for the 7s dyna CT scan protocol
     switch lower(s_energy_bin)
         case 'te'
