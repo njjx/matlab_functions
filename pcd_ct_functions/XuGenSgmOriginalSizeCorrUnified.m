@@ -26,7 +26,9 @@ elseif preprocessing_para.DetectorFirmwareVersion==2
         if preprocessing_para.DeadPixelCorrection
             img_bkg=XuReadHydraEviFromDirect_ver2_w_dead_pixel_correction(s_bkg,preprocessing_para.BkgNum,begin_bkg_frame_idx);
         else
-            img_bkg=XuReadHydraEviFromDirect_ver2(s_bkg,preprocessing_para.BkgNum,begin_bkg_frame_idx);
+            img_bkg=MgReadEviDataCrop(s_bkg,5120,64);
+            img_bkg(:,:,1:begin_bkg_frame_idx)=[];
+            img_bkg = permute(img_bkg,[2 1 3]);
         end
     else
         img_bkg=XuReadHydraEviFromDirect_ver2(s_bkg,preprocessing_para.BkgNum,begin_bkg_frame_idx);
@@ -94,7 +96,8 @@ for idx=1:recon_para.SinogramHeight
             if preprocessing_para.DeadPixelCorrection
                 img_temp=XuReadHydraEviFromDirect_ver2_w_dead_pixel_correction(s_prj,1,idx+begin_frame_idx-1);
             else
-                img_temp=XuReadHydraEviFromDirect_ver2(s_prj,1,idx+begin_frame_idx-1);
+                img_temp = MgReadEviDataCropSubFrame(s_prj,5120,64,idx+begin_frame_idx-1,1);
+                img_temp = img_temp';
             end
         else
             img_temp=XuReadHydraEviFromDirect_ver2(s_prj,1,idx+begin_frame_idx-1);
