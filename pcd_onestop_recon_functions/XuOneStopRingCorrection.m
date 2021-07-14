@@ -4,7 +4,7 @@ if nargin == 3
     preprocessing_para = XuReadJsonc(config_pre_name);
 else
     preprocessing_para.ConvertToHU=1;
-    %by dafult the images have been converted to HU 
+    %by dafult the images have been converted to HU
 end
 
 status =0;
@@ -42,7 +42,7 @@ for file_idx =1:length(D)
     
     filename_origin = D(file_idx).name;
     
-    image_temp = XuReadRaw([rc_para.InputFolder '\'...
+    img_recon = XuReadRaw([rc_para.InputFolder '\'...
         filename_origin], [img_dim img_dim img_slice_count]);
     
     
@@ -51,27 +51,27 @@ for file_idx =1:length(D)
         char(rc_para.OutputFileReplace(2)));
     
     filename_rc=strrep(filename_rc,'.raw','');
+    th_l=rc_para.ReconImageThresholdVals(1);
+    th_h=rc_para.ReconImageThresholdVals(2);
     
+    if preprocessing_para.ConvertToHU
+        img_recon=img_recon+1000;%add 1000 if the image is CT number
+        th_l=rc_para.ReconImageThresholdVals(1)+1000;
+        th_h=rc_para.ReconImageThresholdVals(2)+1000;
+        %air_roi = (img_temp < 500);
+    end
     
-    th_l=rc_para.ReconImageThresholdVals(1)+1000;
-    th_h=rc_para.ReconImageThresholdVals(2)+1000;
     
     for idx=1:img_slice_count
         
         close all;
-        img_temp=image_temp(:,:,idx);
-        
-        
-        if preprocessing_para.ConvertToHU
-            img_temp=img_temp+1000;%add 1000 if the image is CT number
-            air_roi = (img_temp < 500);   
-        end
-        
+        img_recon_slice=img_recon(:,:,idx);
         figure();
-        imshow(img_temp,[th_l th_h]);
-        img_temp = img_temp+air_roi*1000;
+        imshow(img_recon_slice',[th_l th_h]);
+ 
+        %img_temp = img_temp+air_roi*1000;
         
-        [img_pol,mr,mtheta]=XuPolarToCartesian(img_temp,0,0);
+        [img_pol,mr,mtheta]=XuPolarToCartesian(img_recon_slice,0,0);
         
         theta_interval = radtodeg(3*pi/3.5/img_dim);
         mean_filter_width = round(rc_para.MeanFilterWidth/theta_interval);
@@ -103,32 +103,33 @@ for file_idx =1:length(D)
         figure();
         img_corr=CartesianToPolar(img_pol_corrected,mr,mtheta,img_dim,0,0);
         
-        img_corr = img_corr-air_roi*1000;
+        %img_corr = img_corr-air_roi*1000;
         
-        imshow(img_corr,[th_l th_h]);
-        pause(1);
+        
         
         if isfield(rc_para, 'Rotation')
             img_corr = imrotate(img_corr,rc_para.Rotation,'bilinear','crop');
         end
-        
-        if preprocessing_para.ConvertToHU
-            if idx==1
-                WriteRaw([rc_para.OutputFolder, '\',...
-                    filename_rc],img_corr-1000);
-            else
-                AddRaw([rc_para.OutputFolder, '\',...
-                    filename_rc],img_corr-1000);
+        imshow(img_corr',[th_l th_h]);
+        pause(0.05);
+        if isfield(rc_para,'ConvertBackToMu')
+            if rc_para.ConvertBackToMu==1
+                img_corr = img_corr/1000*recon_para.WaterMu;
+            elseif preprocessing_para.ConvertToHU
+                img_corr = img_corr-1000;
             end
-        else
-            if idx==1
-                WriteRaw([rc_para.OutputFolder, '\',...
-                    filename_rc],img_corr);
-            else
-                AddRaw([rc_para.OutputFolder, '\',...
-                    filename_rc],img_corr);
-            end
+        elseif preprocessing_para.ConvertToHU
+            img_corr = img_corr-1000;
         end
+        
+        if idx==1
+            WriteRaw([rc_para.OutputFolder, '\',...
+                filename_rc],img_corr);
+        else
+            AddRaw([rc_para.OutputFolder, '\',...
+                filename_rc],img_corr);
+        end
+        
     end
     
     

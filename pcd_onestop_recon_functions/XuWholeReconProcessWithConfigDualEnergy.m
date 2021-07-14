@@ -35,11 +35,10 @@ copyfile([input_config_folder s_config_fpj],[output_folder s_config_fpj])
 
 %% modify the mu value of water
 if isfield(paras,'MeasuredMuVersusMuYouWant')
-    
-    brain_tissue_HU_measured = paras.MeasuredMuVersusMuYouWant(1);
-    brain_tissue_HU_you_want = paras.MeasuredMuVersusMuYouWant(2);
+    HU_measured = paras.MeasuredMuVersusMuYouWant(1);
+    HU_you_want = paras.MeasuredMuVersusMuYouWant(2);
     water_mu = XuReadJsoncField([output_folder '\' s_config_fbp],'WaterMu');
-    water_mu = XuCorrectWaterMu(water_mu,brain_tissue_HU_measured,brain_tissue_HU_you_want);
+    water_mu = XuCorrectWaterMu(water_mu,HU_measured,HU_you_want);
     XuModifyJsoncFile([output_folder '\' s_config_fbp], 'WaterMu', water_mu);
 end
 
@@ -53,4 +52,5 @@ XuModifyJsoncFile(s_config,'ConfigFolder',output_folder,'config_one_stop_recon_t
 %% reconstruction
 XuWholeReconProcessWithConfig('config_one_stop_recon_temp.jsonc');
 delete('config_one_stop_recon_temp.jsonc');
+status = 1;
 

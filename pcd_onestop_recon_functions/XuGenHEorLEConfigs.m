@@ -2,6 +2,9 @@ function output_folder = XuGenHEorLEConfigs(s_config_fbp,...
     s_config_preprocessing,...
     s_config_ring_correction,...
     s_config_bone_correction, input_config_folder, s_energy_bin)
+% generate config for te,le or he images from te config
+% major task is to change '\te' or '_te' to the specfic energy bin string
+% output_folder is the folder to save the config files
 
 
 recon_para = XuReadJsonc([input_config_folder s_config_fbp]);

@@ -73,7 +73,7 @@ if recon_only==0
         %the reason we do not apply the dead pixel correction is that is takes
         %time.
         
-        [sgm,bkg_count]=XuGenSgmOriginalSizeCorrUnified([raw_data_prj_folder '/' D(idx).name],...
+        [sgm,bkg_count]=XuGenSgmFromEviFiles([raw_data_prj_folder '/' D(idx).name],...
             [raw_data_bkg_folder '/' raw_data_bkg_name],config_fbp_file_name,config_preprocessing_file_name);
         
         if isfield(preprocessing_para,'SaveOriginalSinogram')

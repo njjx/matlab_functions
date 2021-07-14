@@ -27,7 +27,7 @@ if paras.BoneCorrection
 end
 
 if paras.RingCorrection
-    XuOneSteopRingCorrection([folder paras.ConfigFbp],...
+    XuOneStopRingCorrection([folder paras.ConfigFbp],...
         [folder paras.ConfigRingCorrection]);
 end
 
