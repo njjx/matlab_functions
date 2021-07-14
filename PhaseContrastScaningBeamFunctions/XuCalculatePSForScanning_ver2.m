@@ -20,6 +20,10 @@ for n = 0:N-1
     phase_step_data(:,:,n+1) = MgReadRawFile(filename, rows, cols, 1, 0, 0, 'uint16');
 end
 
+phase_step_data(427,370,:) = 1/4*(phase_step_data(426,370,:)...
+    +phase_step_data(428,370,:)+...
+    phase_step_data(427,371,:)+phase_step_data(427,369,:));
+
 phase_step_data = phase_step_data(roi_rows,roi_cols,:);
 
 % correction of drift
