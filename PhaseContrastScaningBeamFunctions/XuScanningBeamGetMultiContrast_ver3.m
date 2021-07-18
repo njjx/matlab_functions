@@ -77,12 +77,12 @@ img_dark = -log(abs(img_sol_obj(:,:,2))./abs(img_sol_air(:,:,2)));
 img_dark = img_dark-img_absorp;
 img_phase = angle(img_sol_obj(:,:,2))-angle(img_sol_air(:,:,2));
 
+% figure();
+% imshow(-log(abs(img_sol_obj(:,:,2))./abs(img_sol_obj(:,:,1))),[0 0.3]);
+% figure();
+% imshow(-log(abs(img_sol_air(:,:,2))./abs(img_sol_air(:,:,1))),[0 0.3]);
 figure();
-imshow(-log(abs(img_sol_obj(:,:,2))./abs(img_sol_obj(:,:,1))),[]);
-figure();
-imshow(-log(abs(img_sol_air(:,:,2))./abs(img_sol_air(:,:,1))),[]);
-figure();
-imshow(img_dark,[]);
+imshow(img_absorp,[]);
 % 
 img_dark = XuStripeCorrection(img_dark',7,0.1,100);
 img_dark = img_dark';
