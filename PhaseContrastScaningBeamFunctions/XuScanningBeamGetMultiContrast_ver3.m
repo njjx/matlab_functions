@@ -67,9 +67,9 @@ air = repmat(air, 1, 1, js.FrameNumObj);
 fprintf('Calculating scanning beam results ...\n');
 shiftInterval = js.MoveDirection * ...
     round(js.MoveSpeed / js.FrameRate * js.MagnificationRatio / js.DetectorPixelSize);
-
-img_sol_obj = XuVirtualPSIntegerInterval(obj,coefs,shiftInterval);
 img_sol_air = XuVirtualPSIntegerInterval(air,coefs,shiftInterval);
+img_sol_obj = XuVirtualPSIntegerInterval(obj,coefs,shiftInterval);
+
 
 %% subtract air
 img_absorp = -log(abs(img_sol_obj(:,:,1))./abs(img_sol_air(:,:,1)));

@@ -41,7 +41,8 @@ img_sol = zeros(order*2+1,size(img_shift_reshape,2),size(img_shift_reshape,3));
 for horizontal_idx = 1:size(img_shift_reshape,2)
     temp = squeeze(img_shift_reshape(:,horizontal_idx,:));
     for subshift_idx = 1:shiftInterval_abs
-        temp_sol = XuNonUniformPhaseStep_ver4(squeeze(coefs_for_shift(subshift_idx:shiftInterval_abs:end,horizontal_idx,:)),...
+        coef_temp = squeeze(coefs_for_shift(subshift_idx:shiftInterval_abs:end,horizontal_idx,:));
+        temp_sol = XuNonUniformPhaseStep_ver4(coef_temp,...
             temp(:,subshift_idx:shiftInterval_abs:end));
         img_sol(:,horizontal_idx,subshift_idx:shiftInterval_abs:end) = temp_sol;
     end

@@ -23,13 +23,14 @@ begin_bkg_frame_idx = GetParaValue(js_preprocess,'BeginBkgFrameIdx',begin_obj_fr
 prj_bkg = MgReadEviDataCrop(s_bkg, 5120, 64);
 prj_bkg(:,:,1:begin_bkg_frame_idx-1)=[];
 prj_bkg = permute(prj_bkg,[2 1 3]);
-
 prj_bkg = mean(prj_bkg, 3);
+
 
 % Read object EVI file data
 prj_obj = MgReadEviDataCrop(s_prj, 5120, 64);
 prj_obj(:,:,1:begin_obj_frame_idx-1)=[];
 prj_obj = permute(prj_obj,[2 1 3]);
+
 
 %==========================================================
 % Perform bad pixel correction if required
@@ -40,7 +41,8 @@ if isfield(js_preprocess, 'DeadPixelCorrection')
         prj_obj = XuCorrectHydraRaw(prj_obj);
     end
 end
-
+prj_bkg = prj_bkg(:,3:62,:);
+prj_obj = prj_obj(:,3:62,:);
 %==========================================================
 % Convert to post-log
 %==========================================================
@@ -50,7 +52,20 @@ if isfield(js_preprocess, 'PostlogBinning') && js_preprocess.PostlogBinning
     % Take log and then perform binning along z direction
     %----------------------------------------------------
     sgm = log(prj_bkg ./ prj_obj);
+    
+    
+    if isfield(js_preprocess,'TableSliceNumber')
+        table_sgm = mean(sgm(:,...
+            js_preprocess.TableSliceNumber(1):...
+            js_preprocess.TableSliceNumber(2),:),2);
+        sgm = sgm-table_sgm;
+    end
+    
+    
     sgm = imresize3(sgm, [5120, js_fbp.SliceCount, views]);
+    
+
+    
 else
     %----------------------------------------------------
     % Perform binning along z direction and then take log
