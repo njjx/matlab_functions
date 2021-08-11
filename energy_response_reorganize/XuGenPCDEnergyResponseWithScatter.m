@@ -28,9 +28,10 @@ if input_photon_energy>50
     
     SigmaTr=interp1(KNCrossSection(:,1),KNCrossSection(:,3),input_photon_energy,'linear');
     SigmaTotal=interp1(KNCrossSection(:,1),KNCrossSection(:,2),input_photon_energy,'linear');
-    Ec=input_photon_energy/SigmaTotal*SigmaTr;
+    Ec=input_photon_energy/SigmaTotal*SigmaTr;%Recoil electron energy
     secondary_photon_energy=FractionR/(FractionS)*input_photon_energy+FractionC/(FractionS)*(input_photon_energy-Ec);
     
+    %calculation of the reabsorption rate for scattering processes
     Rs=interp1(ScatterReabsorption(:,1),ScatterReabsorption(:,2),input_photon_energy,'linear',0);
     %NEED a funtion in the future to calculate the reabsorption rate
     

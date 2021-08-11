@@ -9,8 +9,8 @@ plot(30:120,CdTe_fluorescence_reabsorp_prob(2000,30:120,26.7,23.2));
 hold off;
 xlim([20 120]);
 
-
-res_para=jsondecodewithcomment('config_energy_response.jsonc');
+%%
+res_para=XuReadJsonc('config_energy_response.jsonc');
 
 threshold_energy=eval(res_para.ThresholdEnergy);
 k_travel_distance=eval(res_para.KTravelDistance);
