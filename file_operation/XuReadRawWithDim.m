@@ -3,7 +3,7 @@ function data=XuReadRawWithDim(s)
 %s is a string with format "name-xx-xx-xx"
 %s is without ".raw"
 
-
+s = strrep(s,'.raw','');
 p=strfind(s,'-');
 if length(p)<2
     error('Wrong filename format!');
@@ -16,7 +16,7 @@ for idx=1:length(p)
         temp=str2num(s(pos_left:pos_right));
         if isempty(temp)
             break;
-        elseif idx>=3
+        elseif idx>3
             break;
         else
             dim(idx)=temp;
@@ -26,7 +26,7 @@ for idx=1:length(p)
         temp=str2num(s(pos_left:end));
         if isempty(temp)
             break;
-        elseif idx>=3
+        elseif idx>3
             break;
         else
             dim(idx)=temp;
